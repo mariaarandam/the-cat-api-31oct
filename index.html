@@ -2,9 +2,9 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/picocss/1.5.2/pico.min.css"
         integrity="sha512-3gFq2IXMVlAQaUyahzhjDRivv0yqyXTb7xiy6ivTaG5Uz4hKI54uYxpQefdomgDVQ11eJVUbXG0YdPMDISiGgg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -12,9 +12,9 @@
 </head>
 
 <body>
-    <div class="container" id="cat-container" style="width:75%; margin: 1rem auto;text-align: center;">
-        <img id="cat-image" src="" alt="un gato">
-        <button id="get-cat" style="margin-top: 1rem;">Nuevo Gato</button>
+    <div class="container" id="cat-container" style="width: 75%; margin: 1rem auto; text-align: center">
+        <img id="cat-image" src="" alt="un gato" />
+        <button id="get-cat" style="margin-top: 1rem">Nuevo Gato</button>
     </div>
     <div class="container">
         <h2 id="width">Width: <span></span></h2>
@@ -22,6 +22,22 @@
     </div>
     <script>
         // Suerte !
+
+        const button = document.querySelector("#get-cat");
+        const imgCat = document.querySelector("#cat-image");
+        const imgWidth = document.querySelector("#width");
+        const imgHeight = document.querySelector("#height");
+
+        button.addEventListener("click", async function () {
+            const randomImg = await fetch("https://api.thecatapi.com/v1/images/search"
+            );
+            const info = await randomImg.json();
+
+            imgCat.src = info[0].url;
+            imgWidth.textContent = info[0].width;
+            imgHeight.textContent = info[0].height;
+            console.log("Que muestro", info[0].width);
+        });
     </script>
 </body>
 
